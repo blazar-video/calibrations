@@ -1,0 +1,23 @@
+# Default calibration — NVENC HEVC, quality target.
+#
+# Opinion-free control group (see svtav1_balanced.toml). Lower CRF and longer
+# GOP than the NVENC balanced default; still codec-stock, not generative-tuned.
+#
+# bframes = 3 matches the SVT-AV1 quality default. UNMEASURED: no VMAF sweep
+# has compared it against 0 or 2 on this card yet.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "nvenc_hevc"
+target = "quality"
+
+[video.common]
+rate_control = "crf"
+crf          = 24
+bitrate_kbps = 6000
+keyint       = 240
+bframes      = 3
+pix_fmt      = "yuv420p"

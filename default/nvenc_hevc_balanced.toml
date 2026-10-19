@@ -1,0 +1,24 @@
+# Default calibration — NVENC HEVC, balanced target.
+#
+# Terminal fallback that always resolves. Codec-stock / opinion-free: this is
+# the measurement CONTROL GROUP for hardware AV1, with no generative tuning.
+#
+# bframes = 2 mirrors SVT-AV1's balanced structure with the 4080's reorder
+# depth kept small. UNMEASURED: chosen for parity with the software default,
+# not from a quality/latency sweep.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "nvenc_hevc"
+target = "balanced"
+
+[video.common]
+rate_control = "crf"
+crf          = 30
+bitrate_kbps = 3000
+keyint       = 120
+bframes      = 2
+pix_fmt      = "yuv420p"

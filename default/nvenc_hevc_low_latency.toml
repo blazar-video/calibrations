@@ -1,0 +1,29 @@
+# Default calibration — NVENC HEVC, low_latency target.
+#
+# Opinion-free control group (see svtav1_balanced.toml). Same neutral knobs as
+# the SVT-AV1 defaults, measured per backend: `crf` maps to NVENC constant-QP,
+# not to SVT-AV1's CRF implementation.
+#
+# bframes = 0 is the point of this target: no reorder delay, no loss of
+# mid-stream flush capability. Do not raise it here without an explicit
+# latency budget change.
+#
+# No [video.codec_params]: SVT-style parameter strings are meaningless to NVENC,
+# and the backend rejects them rather than guessing. Backend knobs (preset,
+# tuning) are fixed in the backend for now.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "nvenc_hevc"
+target = "low_latency"
+
+[video.common]
+rate_control = "crf"
+crf          = 32
+bitrate_kbps = 3000
+keyint       = 48
+bframes      = 0
+pix_fmt      = "yuv420p"
