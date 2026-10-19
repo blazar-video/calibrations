@@ -1,0 +1,24 @@
+# Default calibration — SVT-AV1, low_latency target.
+#
+# Opinion-free control group (see svtav1_balanced.toml). Low-latency defaults: short GOP,
+# no B-frames (B-frames add reordering latency), fast preset. Still codec-stock, not
+# generative-tuned.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "svtav1"
+target = "low_latency"
+
+[video.common]
+rate_control = "crf"
+crf          = 32
+bitrate_kbps = 3000
+keyint       = 48
+bframes      = 0
+pix_fmt      = "yuv420p"
+
+[video.codec_params]
+svtav1 = "preset=10"

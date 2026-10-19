@@ -1,0 +1,26 @@
+# Default calibration — SVT-AV1, balanced target.
+#
+# Terminal fallback that always resolves (calibration-format §6, architecture §5.1).
+# Codec-stock / opinion-free: this is the measurement CONTROL GROUP. It deliberately
+# bakes in NO generative tuning so that "does model-aware tuning beat generic encoding"
+# can be measured cleanly against it. Opinions live in specific calibrations that
+# override this at higher specificity.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "svtav1"
+target = "balanced"
+
+[video.common]
+rate_control = "crf"
+crf          = 30
+bitrate_kbps = 3000
+keyint       = 120
+bframes      = 3
+pix_fmt      = "yuv420p"
+
+[video.codec_params]
+svtav1 = "preset=6"

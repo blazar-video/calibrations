@@ -1,0 +1,23 @@
+# Default calibration — SVT-AV1, quality target.
+#
+# Opinion-free control group (see svtav1_balanced.toml). Quality defaults: lower CRF,
+# more B-frames, slower preset. Still codec-stock, not generative-tuned.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "svtav1"
+target = "quality"
+
+[video.common]
+rate_control = "crf"
+crf          = 24
+bitrate_kbps = 6000
+keyint       = 240
+bframes      = 3
+pix_fmt      = "yuv420p"
+
+[video.codec_params]
+svtav1 = "preset=4"
