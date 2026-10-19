@@ -4,8 +4,9 @@
 # the SVT-AV1 defaults, measured per backend: `crf` maps to NVENC constant-QP,
 # not to SVT-AV1's CRF implementation.
 #
-# bframes = 0 is a backend limitation, not a tuning opinion: the NVENC backend
-# does not wire B-frames yet (the async reordering path is the next stage).
+# bframes = 0 is the point of this target: no reorder delay, no loss of
+# mid-stream flush capability. Do not raise it here without an explicit
+# latency budget change.
 # Do not set it higher until that lands — the backend rejects it explicitly.
 #
 # No [video.codec_params]: SVT-style parameter strings are meaningless to NVENC,

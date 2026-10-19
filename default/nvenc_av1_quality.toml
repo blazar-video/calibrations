@@ -3,8 +3,8 @@
 # Opinion-free control group (see svtav1_balanced.toml). Lower CRF and longer
 # GOP than the NVENC balanced default; still codec-stock, not generative-tuned.
 #
-# bframes = 0 is a backend limitation, not a tuning opinion: B-frames are not
-# wired yet. Long-GOP quality gains from B-frames arrive with that work.
+# bframes = 3 matches the SVT-AV1 quality default. UNMEASURED: no VMAF sweep
+# has compared it against 0 or 2 on this card yet.
 schema_version = 1
 source = "default"
 
@@ -19,5 +19,5 @@ rate_control = "crf"
 crf          = 24
 bitrate_kbps = 6000
 keyint       = 240
-bframes      = 0
+bframes      = 3
 pix_fmt      = "yuv420p"

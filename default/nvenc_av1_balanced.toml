@@ -3,8 +3,9 @@
 # Terminal fallback that always resolves. Codec-stock / opinion-free: this is
 # the measurement CONTROL GROUP for hardware AV1, with no generative tuning.
 #
-# bframes = 0 is a backend limitation, not a tuning opinion: the NVENC backend
-# does not wire B-frames yet. The SVT-AV1 balanced default uses 3; this file
+# bframes = 2 mirrors SVT-AV1's balanced structure with the 4080's reorder
+# depth kept small. UNMEASURED: chosen for parity with the software default,
+# not from a quality/latency sweep.
 # will follow once the async reordering path lands.
 schema_version = 1
 source = "default"
@@ -20,5 +21,5 @@ rate_control = "crf"
 crf          = 30
 bitrate_kbps = 3000
 keyint       = 120
-bframes      = 0
+bframes      = 2
 pix_fmt      = "yuv420p"
