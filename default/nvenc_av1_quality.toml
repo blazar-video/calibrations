@@ -1,0 +1,23 @@
+# Default calibration — NVENC AV1, quality target.
+#
+# Opinion-free control group (see svtav1_balanced.toml). Lower CRF and longer
+# GOP than the NVENC balanced default; still codec-stock, not generative-tuned.
+#
+# bframes = 0 is a backend limitation, not a tuning opinion: B-frames are not
+# wired yet. Long-GOP quality gains from B-frames arrive with that work.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "nvenc_av1"
+target = "quality"
+
+[video.common]
+rate_control = "crf"
+crf          = 24
+bitrate_kbps = 6000
+keyint       = 240
+bframes      = 0
+pix_fmt      = "yuv420p"

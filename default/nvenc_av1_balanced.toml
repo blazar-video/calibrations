@@ -1,0 +1,24 @@
+# Default calibration — NVENC AV1, balanced target.
+#
+# Terminal fallback that always resolves. Codec-stock / opinion-free: this is
+# the measurement CONTROL GROUP for hardware AV1, with no generative tuning.
+#
+# bframes = 0 is a backend limitation, not a tuning opinion: the NVENC backend
+# does not wire B-frames yet. The SVT-AV1 balanced default uses 3; this file
+# will follow once the async reordering path lands.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "nvenc_av1"
+target = "balanced"
+
+[video.common]
+rate_control = "crf"
+crf          = 30
+bitrate_kbps = 3000
+keyint       = 120
+bframes      = 0
+pix_fmt      = "yuv420p"
