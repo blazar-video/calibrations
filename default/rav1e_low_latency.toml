@@ -1,0 +1,20 @@
+# Default calibration — rav1e, low_latency target.
+#
+# Placeholder for the rav1e backend (still a mock). Mirrors the SVT-AV1 ladder so
+# target semantics stay comparable. UNMEASURED.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "rav1e"
+target = "low_latency"
+
+[video.common]
+rate_control = "crf"
+crf          = 32
+bitrate_kbps = 3000
+keyint       = 48
+bframes      = 0
+pix_fmt      = "yuv420p"
