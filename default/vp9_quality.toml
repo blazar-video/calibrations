@@ -1,0 +1,21 @@
+# Default calibration — vp9, quality target.
+#
+# Codec-stock control group. UNMEASURED: the CRF/keyint/B-frame ladder mirrors
+# the SVT-AV1 defaults so the targets mean the same thing across codecs; it is
+# not the result of a rate-distortion sweep.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "vp9"
+target = "quality"
+
+[video.common]
+rate_control = "crf"
+crf          = 24
+bitrate_kbps = 3000
+keyint       = 240
+bframes      = 3
+pix_fmt      = "yuv420p"
