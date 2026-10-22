@@ -21,3 +21,7 @@ semantically meaningful — the resolution key lives inside each file.
 Each calibration declares `source = default | calibrator | user`. Resolution is
 specificity-ordered; `source` only breaks ties at equal specificity
 (`user > calibrator > default`), and the tie-break is logged.
+
+## License
+
+Apache-2.0. See `LICENSE`.
