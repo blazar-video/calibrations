@@ -1,0 +1,30 @@
+# Default calibration — VideoToolbox H.264, quality target.
+#
+# UNMEASURED: the deeper GOP, lower quantiser ladder mirrors the other codecs so the targets mean the
+# same thing across the set. It is not the result of a rate-distortion sweep.
+#
+# Two fields do not mean here what they mean elsewhere, because VideoToolbox has
+# no CRF control:
+#   * `crf` is mapped by the backend onto kVTCompressionPropertyKey_Quality as
+#     `1 - crf/51`. It is a relative knobs setting, NOT a CRF, and comparing it
+#     with x264/x265 numbers is meaningless.
+#   * `bframes` only decides whether frame reordering is allowed at all
+#     (kVTCompressionPropertyKey_AllowFrameReordering); the count is not honoured,
+#     so 3 and 1 behave identically.
+# `bitrate_kbps` under a VBR calibration does map onto AverageBitRate as written.
+schema_version = 1
+source = "default"
+
+[key]
+model  = { family = "*", version = "*", quant = "*", size = "*" }
+scene  = "*"
+codec  = "videotoolbox_h264"
+target = "quality"
+
+[video.common]
+rate_control = "crf"
+crf          = 24
+bitrate_kbps = 6000
+keyint       = 240
+bframes      = 3
+pix_fmt      = "nv12"
